@@ -58,18 +58,40 @@ public class ListFrag extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("item", weatherDataArrayList.get(position));
+                int orientation = getActivity().getResources().getConfiguration().orientation;
+                //if orientation == 1 -> PORTRAIT  else if orientation == 2 -> LANDSCAPE
 
-                DetailFrag detailFrag = new DetailFrag();
-                detailFrag.setArguments(bundle);
+                if(orientation == 1) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("item", weatherDataArrayList.get(position));
 
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.Container, detailFrag)
-                        .addToBackStack(null)
-                        .commit();
+                    DetailFrag detailFrag = new DetailFrag();
+                    detailFrag.setArguments(bundle);
+
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .add(R.id.Container, detailFrag)
+                            .addToBackStack(null)
+                            .commit();
+                } else if ( orientation == 2) {
+
+                    WeatherData weatherData = weatherDataArrayList.get(position);
+
+                    ImageView list_item_icon = (ImageView) rootView.findViewById(R.id.list_item_icon_landscape);
+                    TextView text_day = (TextView) rootView.findViewById(R.id.text_day_landscape);
+                    TextView text_max_temp = (TextView) rootView.findViewById(R.id.text_max_temp_landscape);
+                    TextView text_min_temp = (TextView) rootView.findViewById(R.id.text_min_temp_landscape);
+                    TextView text_weather = (TextView) rootView.findViewById(R.id.text_weather_landscape);
+
+                    //timemilli ko days me covert kerne ka method
+                    text_day.setText(convertTimemillisToDay(weatherData.getDate() * 1000));
+                    text_max_temp.setText(weatherData.getMaxTemp() + getResources().getString(R.string.degree_symbol));
+                    text_min_temp.setText(weatherData.getMinTemp() + getResources().getString(R.string.degree_symbol));
+                    text_weather.setText(weatherData.getWeatherCondition());
+                    list_item_icon.setImageResource(getImageFromWeatherId(weatherData.getWeatherId()));
+
+                }
 
             }
         });
@@ -110,7 +132,10 @@ public class ListFrag extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            if(getItemViewType(position) == VIEW_TYPE_TODAY){
+            int orientation = getActivity().getResources().getConfiguration().orientation;
+
+            // orientation == 1 -> PORTRAIT
+            if(orientation == 1 && getItemViewType(position) == VIEW_TYPE_TODAY){
                 convertView = inflater.inflate(R.layout.list_item_forecast_today, parent, false);
 
             } else {

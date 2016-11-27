@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/list_View"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.3"></ListView>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_day_landscape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="66.66dp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="20dp"
+                    android:text="Today"
+                    android:textColor="#eae1e1"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_max_temp_landscape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="28"
+                    android:textColor="#eae1e1"
+                    android:textSize="30dp"/>
+
+                <TextView
+                    android:id="@+id/text_min_temp_landscape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="66.66dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="12"
+                    android:textColor="#eae1e1"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/list_item_icon_landscape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:src="@drawable/art_clear" />
+
+                <TextView
+                    android:id="@+id/text_weather_landscape"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text="CLEAR"
+                    android:textColor="#eae1e1"
+                    android:textSize="15dp"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+</LinearLayout>

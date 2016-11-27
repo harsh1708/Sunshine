@@ -136,7 +136,7 @@ public class FetchWeather extends AsyncTask<String, Void, String> {
             }
 
             WeatherDataDBHelper weatherDataDBHelper = new WeatherDataDBHelper(context, null, null, 1);
-            weatherDataDBHelper.saveWeatherDataArrayListInDB(weatherDataArrayList);
+//            weatherDataDBHelper.saveWeatherDataArrayListInDB(weatherDataArrayList);
 
             Intent intent  = new Intent(context,MainActivity.class);
             intent.putParcelableArrayListExtra("weatherData",weatherDataArrayList);
