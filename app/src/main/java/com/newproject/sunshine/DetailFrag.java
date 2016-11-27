@@ -36,7 +36,6 @@ public class DetailFrag extends Fragment {
             Log.e("Harsh", weatherData.getWeatherCondition());
 
             //String value= bundle.getString("item");
-            //textView.setText(value);
         }
 
 

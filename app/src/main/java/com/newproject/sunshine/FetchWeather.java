@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -134,12 +135,27 @@ public class FetchWeather extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
 
+            WeatherDataDBHelper weatherDataDBHelper = new WeatherDataDBHelper(context, null, null, 1);
+            weatherDataDBHelper.saveWeatherDataArrayListInDB(weatherDataArrayList);
 
             Intent intent  = new Intent(context,MainActivity.class);
             intent.putParcelableArrayListExtra("weatherData",weatherDataArrayList);
             context.startActivity(intent);
 
-     }
+     } else {
+                if(isError == -1){
+                    Toast.makeText(context, "Please check internet connection", Toast.LENGTH_LONG).show();
+
+                    WeatherDataDBHelper weatherDataDBHelper = new WeatherDataDBHelper(context, null, null, 1);
+//                    ArrayList<WeatherData> weatherDataArrayList = weatherDataDBHelper.getAllWeatherFromDataBase();
+
+//                    if(weatherDataArrayList != null && weatherDataArrayList.size() > 0) {
+//                        Intent intent = new Intent(context, MainActivity.class);
+//                        intent.putParcelableArrayListExtra("weatherData", weatherDataArrayList);
+//                        context.startActivity(intent);
+//                    }
+                }
+        }
 
 
     }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class ListFrag extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             weatherDataArrayList = bundle.getParcelableArrayList("weatherData");
+        } else {
+
         }
 
 
@@ -114,7 +117,7 @@ public class ListFrag extends Fragment {
                 convertView = inflater.inflate(R.layout.list_item, parent, false);
             }
 
-
+            ImageView list_item_icon = (ImageView) convertView.findViewById(R.id.list_item_icon);
             TextView text_day = (TextView) convertView.findViewById(R.id.text_day);
             TextView text_max_temp = (TextView) convertView.findViewById(R.id.text_max_temp);
             TextView text_min_temp = (TextView) convertView.findViewById(R.id.text_min_temp);
@@ -126,10 +129,33 @@ public class ListFrag extends Fragment {
             text_max_temp.setText(weatherData.getMaxTemp() + getResources().getString(R.string.degree_symbol));
             text_min_temp.setText(weatherData.getMinTemp() + getResources().getString(R.string.degree_symbol));
             text_weather.setText(weatherData.getWeatherCondition());
+            list_item_icon.setImageResource(getImageFromWeatherId(weatherData.getWeatherId()));
 
             return convertView;
         }
     }
+
+    private int getImageFromWeatherId(int weatherId){
+        if (weatherId >= 200 && weatherId <= 232){
+            return R.drawable.art_light_clouds;
+        } else if (weatherId >= 300 && weatherId <= 321){
+            return R.drawable.art_clear;
+        } else if (weatherId >= 500 && weatherId <= 531){
+            return R.drawable.art_light_clouds;
+        } else if (weatherId >= 600 && weatherId <= 622){
+            return R.drawable.art_clear;
+        } else if (weatherId >= 701 && weatherId <= 781){
+            return R.drawable.art_light_clouds;
+        } else if (weatherId == 800){
+            return R.drawable.art_light_clouds;
+        } else if (weatherId >= 801 && weatherId <= 804){
+            return R.drawable.art_light_clouds;
+        } else {
+            return R.drawable.kweather;
+        }
+    }
+
+
 
     private String convertTimemillisToDay(long timeMillis) {
         Calendar calendar = Calendar.getInstance();
